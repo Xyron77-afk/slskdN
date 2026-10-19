@@ -22,7 +22,7 @@ For dev or build tags, use the same logical version string embedded in the tag.
 
 ## [Unreleased]
 
-- Packaging: stable container releases now publish matching `:main` and `:latest` aliases to GHCR and Docker Hub; main-branch canaries stay on development tags.
+- Packaging: stable container releases publish matching `:main`, `:master`, and `:latest` aliases to GHCR and Docker Hub. Docker Hub credentials gate stable publication; main-branch canaries stay on development tags.
 
 - Docs: the taste recommendation API and its capabilities probe are listed under Soulseek Native Discovery in `docs/FEATURES.md`, including their use by SeerrNG Collector Picks.
 
