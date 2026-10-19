@@ -3,6 +3,22 @@
 // </copyright>
 namespace slskd.SocialFederation;
 
+/// <summary>
+///     Features of the taste recommendation API, probed by integrations before they call it.
+/// </summary>
+public sealed class TasteRecommendationCapabilities
+{
+    public bool Recommendations { get; set; } = true;
+
+    public bool WishlistPromotion { get; set; } = true;
+
+    public bool ReleaseRadar { get; set; } = true;
+
+    public bool GraphPreview { get; set; } = true;
+
+    public int ContractVersion { get; set; } = 1;
+}
+
 public sealed class TasteRecommendationRequest
 {
     public int Limit { get; set; } = 20;

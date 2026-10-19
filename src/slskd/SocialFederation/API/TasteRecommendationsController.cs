@@ -27,6 +27,23 @@ public sealed class TasteRecommendationsController : ControllerBase
         _recommendationService = recommendationService;
     }
 
+    /// <summary>
+    ///     Reports whether taste recommendations are available on this instance, so integrations
+    ///     such as SeerrNG can probe once instead of calling the recommendation endpoint to find out.
+    /// </summary>
+    [HttpGet("capabilities")]
+    [Authorize(Policy = AuthPolicy.Any)]
+    [ProducesResponseType(typeof(TasteRecommendationCapabilities), 200)]
+    public IActionResult GetCapabilities()
+    {
+        if (Program.IsRelayAgent)
+        {
+            return Forbid();
+        }
+
+        return Ok(new TasteRecommendationCapabilities());
+    }
+
     [HttpPost]
     [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)]
     [ProducesResponseType(typeof(TasteRecommendationResult), 200)]
