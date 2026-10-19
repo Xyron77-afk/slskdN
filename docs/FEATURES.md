@@ -92,6 +92,7 @@ DHT, and the mesh overlay transfer path, see [DHT and Mesh Architecture](DHT_MES
 - Native discovery API under `/api/v0/soulseek/*` for authenticated operators and clients
 - Recommendation rows can start a normal Soulseek search or create a disabled review-only Wishlist item with auto-download off
 - Federated Taste can explicitly include native Soulseek recommendation strings as low-trust discovery seeds
+- Taste recommendations from followed sources are available to integrations: `POST /api/v0/taste-recommendations` returns releases several trusted collectors share with the reasons, `POST /api/v0/taste-recommendations/release-radar` follows an artist, and `GET /api/v0/taste-recommendations/capabilities` reports which of these exist. SeerrNG shows them as **Collector Picks** with the reason each appeared
 - User cards expose lazy native-interest lookup so large lists do not trigger background request fan-out
 - Messages workspace exposes batch private-message sending through the native Soulseek multi-recipient server command
 - Discovery calls use separate Soulseek safety limiter buckets from manual search and browse requests
