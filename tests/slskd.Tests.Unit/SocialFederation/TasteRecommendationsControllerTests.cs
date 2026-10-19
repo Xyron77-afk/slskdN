@@ -11,6 +11,22 @@ using slskd.SocialFederation.API;
 public sealed class TasteRecommendationsControllerTests
 {
     [Fact]
+    public void GetCapabilities_AdvertisesTheTasteContract()
+    {
+        var controller = new TasteRecommendationsController(new Mock<ITasteRecommendationService>().Object);
+
+        var result = controller.GetCapabilities();
+
+        var ok = Assert.IsType<OkObjectResult>(result);
+        var capabilities = Assert.IsType<TasteRecommendationCapabilities>(ok.Value);
+        Assert.True(capabilities.Recommendations);
+        Assert.True(capabilities.ReleaseRadar);
+        Assert.True(capabilities.WishlistPromotion);
+        Assert.True(capabilities.GraphPreview);
+        Assert.Equal(1, capabilities.ContractVersion);
+    }
+
+    [Fact]
     public async Task PromoteToWishlist_ReturnsServiceResult()
     {
         var service = new Mock<ITasteRecommendationService>();
