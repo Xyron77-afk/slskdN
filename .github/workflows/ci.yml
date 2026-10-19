@@ -341,11 +341,13 @@ jobs:
             echo "ghcr.io/snapetech-org/slskdn:${TAG}"
             echo 'ghcr.io/snapetech-org/slskdn:canary'
             echo 'ghcr.io/snapetech-org/slskdn:latest'
+            echo 'ghcr.io/snapetech-org/slskdn:main'
             if [ "${HAS_DOCKERHUB}" = "true" ]; then
               echo "${DOCKERHUB_IMAGE}:${CONTAINER_VERSION}"
               echo "${DOCKERHUB_IMAGE}:${TAG}"
               echo "${DOCKERHUB_IMAGE}:canary"
               echo "${DOCKERHUB_IMAGE}:latest"
+              echo "${DOCKERHUB_IMAGE}:main"
             fi
             echo 'EOF'
           } >> "$GITHUB_OUTPUT"

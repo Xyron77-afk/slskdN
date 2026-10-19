@@ -22,6 +22,8 @@ For dev or build tags, use the same logical version string embedded in the tag.
 
 ## [Unreleased]
 
+- Packaging: stable container releases now publish matching `:main` and `:latest` aliases to GHCR and Docker Hub; main-branch canaries stay on development tags.
+
 - Docs: the taste recommendation API and its capabilities probe are listed under Soulseek Native Discovery in `docs/FEATURES.md`, including their use by SeerrNG Collector Picks.
 
 - Social federation: `GET /api/v0/taste-recommendations/capabilities` reports which taste recommendation features exist, so integrations such as SeerrNG can probe once instead of calling the recommendation endpoint.

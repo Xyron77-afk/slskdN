@@ -1178,9 +1178,11 @@ jobs:
             echo 'tags<<EOF'
             echo 'ghcr.io/snapetech-org/slskdn:${{ needs.parse.outputs.version }}'
             echo 'ghcr.io/snapetech-org/slskdn:latest'
+            echo 'ghcr.io/snapetech-org/slskdn:main'
             if [ "${HAS_DOCKERHUB}" = "true" ]; then
               echo "${DOCKERHUB_IMAGE}:${{ needs.parse.outputs.version }}"
               echo "${DOCKERHUB_IMAGE}:latest"
+              echo "${DOCKERHUB_IMAGE}:main"
             else
               echo "Docker Hub secrets are not configured; publishing GHCR tags only." >&2
             fi
@@ -1205,9 +1207,11 @@ jobs:
           echo "✅ Published Docker images:"
           echo "  - ghcr.io/snapetech-org/slskdn:${{ needs.parse.outputs.version }}"
           echo "  - ghcr.io/snapetech-org/slskdn:latest"
+          echo "  - ghcr.io/snapetech-org/slskdn:main"
           if [ "${HAS_DOCKERHUB}" = "true" ]; then
             echo "  - ${DOCKERHUB_IMAGE}:${{ needs.parse.outputs.version }}"
             echo "  - ${DOCKERHUB_IMAGE}:latest"
+            echo "  - ${DOCKERHUB_IMAGE}:main"
           else
             echo "  - Docker Hub skipped; configure DOCKERHUB_USERNAME and DOCKERHUB_TOKEN to enable it."
           fi
