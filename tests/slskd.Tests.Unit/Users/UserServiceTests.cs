@@ -108,6 +108,44 @@ namespace slskd.Tests.Unit.Users
             }
 
             [Theory, AutoData]
+            public void Returns_Blacklisted_For_Blacklisted_User_From_Privileged_List(string username)
+            {
+                var (service, mocks) = GetFixture(BlacklistedOptions(username));
+
+                mocks.SoulseekClient.Raise(x => x.PrivilegedUserListReceived += null, mocks.SoulseekClient.Object, (IReadOnlyCollection<string>)new[] { username });
+
+                Assert.Equal(Application.BlacklistedGroup, service.GetGroup(username));
+            }
+
+            [Theory, AutoData]
+            public void Returns_Blacklisted_For_Blacklisted_User_From_Status_Update(string username)
+            {
+                var (service, mocks) = GetFixture(BlacklistedOptions(username));
+
+                mocks.SoulseekClient.Raise(x => x.UserStatusChanged += null, mocks.SoulseekClient.Object, new UserStatus(username, UserPresence.Online, isPrivileged: true));
+
+                Assert.Equal(Application.BlacklistedGroup, service.GetGroup(username));
+            }
+
+            [Theory, AutoData]
+            public void Returns_Blacklisted_For_Blacklisted_User_From_Statistics_Update(string username)
+            {
+                var (service, mocks) = GetFixture(BlacklistedOptions(username));
+
+                mocks.SoulseekClient.Raise(x => x.UserStatisticsChanged += null, mocks.SoulseekClient.Object, new UserStatistics(username, 1, 1, 1, 1));
+
+                Assert.Equal(Application.BlacklistedGroup, service.GetGroup(username));
+            }
+
+            private static Options BlacklistedOptions(string username) => new Options()
+            {
+                Groups = new Options.GroupsOptions()
+                {
+                    Blacklisted = new Options.GroupsOptions.BlacklistedOptions { Members = new[] { username } },
+                },
+            };
+
+            [Theory, AutoData]
             public void Returns_Non_Empty_Built_In_Group_After_User_Is_Removed_From_User_Defined_Group(string group, string username)
             {
                 var options = new Options()
@@ -136,27 +174,6 @@ namespace slskd.Tests.Unit.Users
                 var resolvedGroup = service.GetGroup(username);
 
                 Assert.Contains(resolvedGroup, new[] { Application.DefaultGroup, Application.LeecherGroup });
-            }
-
-            [Theory, AutoData]
-            public void Returns_Blacklisted_For_Blacklisted_User_From_Privileged_List(string username)
-            {
-                var options = new Options()
-                {
-                    Groups = new Options.GroupsOptions()
-                    {
-                        Blacklisted = new Options.GroupsOptions.BlacklistedOptions
-                        {
-                            Members = new[] { username },
-                        },
-                    },
-                };
-
-                var (service, mocks) = GetFixture(options);
-
-                mocks.SoulseekClient.Raise(client => client.PrivilegedUserListReceived += null, null, (IReadOnlyCollection<string>)new[] { username });
-
-                Assert.Equal(Application.BlacklistedGroup, service.GetGroup(username));
             }
         }
 

@@ -189,7 +189,7 @@ namespace slskd.Users
             // note: this is an extremely hot path; keep the work done to an absolute minimum.
             if (UserDictionary.TryGetValue(username ?? string.Empty, out var user))
             {
-                if (IsBlacklisted(user.Username))
+                if (IsBlacklisted(username))
                 {
                     return Application.BlacklistedGroup;
                 }

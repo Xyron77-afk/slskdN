@@ -28,6 +28,8 @@ For dev or build tags, use the same logical version string embedded in the tag.
   blacklisted group everywhere, including upload scheduling, upload speed
   limits, and the user group API. Previously they could resolve as privileged.
   (#382)
+- The group lookup now checks the blacklist against the looked-up username
+  rather than the cached record's field, so no cache entry path can bypass it.
 
 ### Packaging
 
