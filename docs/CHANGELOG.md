@@ -22,6 +22,8 @@ For dev or build tags, use the same logical version string embedded in the tag.
 
 ## [Unreleased]
 
+## [2026101818-slskdn.352] — 2026-10-18
+
 ### Fixed
 
 - Blacklisted users who also hold Soulseek privileges now resolve to the
