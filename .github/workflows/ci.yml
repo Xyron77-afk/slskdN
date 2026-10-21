@@ -127,7 +127,12 @@ jobs:
             packaging/aur/PKGBUILD-bin
 
       - name: Changelog Discipline Check
-        if: github.event_name == 'pull_request' && github.event.pull_request.user.type != 'Bot'
+        # The release-note contract validates this opt-out; skip the legacy
+        # changelog gate when the PR uses the exact internal-only marker.
+        if: >-
+          ${{ github.event_name == 'pull_request' &&
+              github.event.pull_request.user.type != 'Bot' &&
+              !contains(github.event.pull_request.body, 'release-note: none') }}
         run: |
           bash scripts/validate-changelog-entry.sh \
             range \
