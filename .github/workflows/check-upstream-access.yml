@@ -4,11 +4,6 @@ on:
   schedule:
     # Run daily at 9am UTC (polite, not aggressive)
     - cron: '0 9 * * *'
-  push:
-    # Only here to prevent GitHub from showing "failed" on workflow file changes
-    # This path will never match, so push events never actually run
-    paths:
-      - '.github/workflows/this-file-does-not-exist-intentionally.yml'
 
 permissions:
   contents: write
