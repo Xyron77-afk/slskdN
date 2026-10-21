@@ -22,6 +22,8 @@ For dev or build tags, use the same logical version string embedded in the tag.
 
 ## [Unreleased]
 
+## [2026102116-slskdn.353] — 2026-10-21
+
 - Security: Node-based builds now use patched runtime versions, and the web lockfile resolves follow-redirects 1.16.1 to fix its request-header disclosure advisories.
 
 - OIDC login provider guidance now uses the corrected Okta Authorization Code
