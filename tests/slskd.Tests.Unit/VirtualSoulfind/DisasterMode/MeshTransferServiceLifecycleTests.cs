@@ -28,10 +28,14 @@ public class MeshTransferServiceLifecycleTests
             ct: CancellationToken.None);
 
         var deadline = DateTimeOffset.UtcNow.AddSeconds(30);
+        MeshTransferStatus? status = null;
         while (DateTimeOffset.UtcNow < deadline)
         {
-            var status = await service.GetTransferStatusAsync(transferId, CancellationToken.None);
-            if (status is { State: MeshTransferState.Completed or MeshTransferState.Failed or MeshTransferState.Cancelled })
+            status = await service.GetTransferStatusAsync(transferId, CancellationToken.None);
+            var isTerminal = status is { State: MeshTransferState.Completed or MeshTransferState.Failed or MeshTransferState.Cancelled };
+            var resourcesRetired = !GetCancellationSources(service).ContainsKey(transferId)
+                && !GetProgressSubjects(service).ContainsKey(transferId);
+            if (isTerminal && resourcesRetired)
             {
                 break;
             }
@@ -39,6 +43,9 @@ public class MeshTransferServiceLifecycleTests
             await Task.Delay(50);
         }
 
+        Assert.True(
+            status is { State: MeshTransferState.Completed or MeshTransferState.Failed or MeshTransferState.Cancelled },
+            "The transfer did not reach a terminal state before the timeout.");
         Assert.DoesNotContain(transferId, GetCancellationSources(service).Keys);
         Assert.DoesNotContain(transferId, GetProgressSubjects(service).Keys);
     }

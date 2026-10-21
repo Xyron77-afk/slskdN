@@ -1,6 +1,6 @@
 # Current API surface inventory
 
-Generated: 2026-10-13T11:13:25Z
+Generated: 2026-10-21T18:48:35Z
 
 This inventory is generated from controller attributes. It is intended for parity/security review, not as a replacement for Swagger or integration tests.
 
@@ -111,7 +111,7 @@ Route bucket policy: new web-consumed JSON APIs should be versioned. Non-version
 | `src/slskd/Sharing/API/SharesController.cs` | `"api/v{version:apiVersion}/share-grants"` | versioned | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] | yes | no | 10 |
 | `src/slskd/SocialFederation/API/ActivityPubController.cs` | `"actors"` | federation-protocol | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.AdministratorOnly)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] | yes | yes | 7 |
 | `src/slskd/SocialFederation/API/FederationDiagnosticsController.cs` | `"api/v{version:apiVersion}/federation/diagnostics"` | versioned | [Authorize(Policy = AuthPolicy.Any)] | yes | no | 1 |
-| `src/slskd/SocialFederation/API/TasteRecommendationsController.cs` | `"api/v{version:apiVersion}/taste-recommendations"` | versioned | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] | yes | no | 4 |
+| `src/slskd/SocialFederation/API/TasteRecommendationsController.cs` | `"api/v{version:apiVersion}/taste-recommendations"` | versioned | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] | yes | no | 5 |
 | `src/slskd/SocialFederation/API/WebFingerController.cs` | `".well-known"` | federation-protocol | [Authorize(Policy = AuthPolicy.Any)] | yes | yes | 1 |
 | `src/slskd/Solid/API/SolidController.cs` | `"api/v{version:apiVersion}/solid"` | versioned | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.ReadWriteOrAdministrator)] | yes | no | 2 |
 | `src/slskd/SongID/API/SongIdController.cs` | `"api/v{version:apiVersion}/songid"` | versioned | [Authorize(Policy = AuthPolicy.Any)] [Authorize(Policy = AuthPolicy.Any, Roles = AuthRole.AdministratorOnly)] | yes | no | 7 |
