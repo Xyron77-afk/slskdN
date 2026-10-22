@@ -181,6 +181,8 @@ public static class WebServiceCollectionExtensions
 
         if (!optionsAtStartup.Web.Authentication.Disabled)
         {
+            var isAppleIssuer = IsAppleIssuer(optionsAtStartup.Web.Authentication.Oidc.IssuerUrl);
+
             services.AddAuthorization(options =>
             {
                 options.AddPolicy(AuthPolicy.JwtOnly, policy =>
@@ -306,7 +308,6 @@ public static class WebServiceCollectionExtensions
                 .AddOpenIdConnect(OidcAuthenticationScheme, options =>
                 {
                     var oidc = optionsAtStartup.Web.Authentication.Oidc;
-                    var isAppleIssuer = IsAppleIssuer(oidc.IssuerUrl);
                     var configured = !string.IsNullOrWhiteSpace(oidc.IssuerUrl) &&
                                      !string.IsNullOrWhiteSpace(oidc.ClientId) &&
                                      !string.IsNullOrWhiteSpace(oidc.ClientSecret) &&
