@@ -119,11 +119,16 @@ internal class StaticOptionsSnapshot : IOptionsSnapshot<slskd.Options>
 
 internal class StubSecurityService : ISecurityService
 {
-    public JwtSecurityToken GenerateJwt(string username, Role role, int? ttl = null, string[] scopes = null) =>
+    public JwtSecurityToken GenerateJwt(
+        string username,
+        Role role,
+        int? ttl = null,
+        string[]? scopes = null,
+        IEnumerable<Claim>? additionalClaims = null) =>
         new JwtSecurityToken(
             issuer: "test",
             audience: "test",
-            claims: Array.Empty<Claim>(),
+            claims: additionalClaims ?? Array.Empty<Claim>(),
             notBefore: DateTime.UtcNow,
             expires: DateTime.UtcNow.AddHours(1),
             signingCredentials: new SigningCredentials(
